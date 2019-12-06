@@ -27,16 +27,16 @@ const rawInput = readInput()
 const moduleInput = rawInput.split("\n").map(Number)
 
 const requiredFuel = (mass: number) => {
-  const result = Math.floor(mass / 3) - 2
-  return result
+  return Math.floor(mass / 3) - 2
 }
 
-const total = () => {
-  const fuel = moduleInput.reduce((total, module) => {
-    total += requiredFuel(module)
-    return total
-  }, 0)
-  return fuel
+const totalRequiredFuel = (mass: number) => {
+  const fuel = requiredFuel(mass)
+  return fuel > 0 ? fuel + totalRequiredFuel(fuel) : 0
 }
 
-console.log(total())
+const total = (input: number[], calculateRequiredFuel: Function) => {
+  return input.reduce((acc, moduleMass) => acc + calculateRequiredFuel(moduleMass), 0)
+}
+
+console.log(total(moduleInput, totalRequiredFuel))
