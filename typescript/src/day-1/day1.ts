@@ -35,8 +35,8 @@ const totalRequiredFuel = (mass: number) => {
   return fuel > 0 ? fuel + totalRequiredFuel(fuel) : 0
 }
 
-const total = (input: number[], calculateRequiredFuel: Function) => {
+const total = (input: number[], calculateRequiredFuel: (mass: number) => number) => {
   return input.reduce((acc, moduleMass) => acc + calculateRequiredFuel(moduleMass), 0)
 }
 
-console.log(total(moduleInput, totalRequiredFuel))
+total(moduleInput, totalRequiredFuel)
