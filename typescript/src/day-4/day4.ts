@@ -19,7 +19,7 @@ const findPasswordRange = (input: number[]) => {
     for (let j = 0; j < passSize; j++) {
       if (currentPassArray[j] < currentPassArray[j - 1]) {
         possiblePassword = false
-        break
+        continue
       }
 
       if (currentPassArray[j - 1] === currentPassArray[j]) {
